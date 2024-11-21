@@ -1,0 +1,16 @@
+{
+  "mode": "peer",
+  "connect": {
+    "endpoints": [
+      "tcp/192.168.80.1:7447"
+    ]
+  },
+  "listen": {
+    "timeout_ms": 0,
+    "endpoints": {
+      "peer": [
+        "tcp/192.168.80.1:7447"
+      ]
+    }
+  }
+}
