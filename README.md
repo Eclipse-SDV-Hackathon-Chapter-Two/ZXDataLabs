@@ -1,4 +1,4 @@
-<p align="center">
+<p align="center" width="100%">
 
 # Abstraction Beyond ThreadX
 ## By ZXData Labs
