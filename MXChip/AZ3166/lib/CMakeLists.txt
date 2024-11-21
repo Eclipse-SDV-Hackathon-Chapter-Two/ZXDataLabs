@@ -22,7 +22,7 @@ set(NXD_ENABLE_FILE_SERVERS OFF CACHE BOOL "Disable fileX dependency by netxduo"
 add_subdirectory(${SHARED_LIB_DIR}/threadx threadx)
 add_subdirectory(${SHARED_LIB_DIR}/netxduo netxduo)
 add_subdirectory(${SHARED_LIB_DIR}/jsmn jsmn)
-# add_subdirectory(${SHARED_LIB_DIR}/zenoh-pico zenohpico)
+add_subdirectory(${SHARED_LIB_DIR}/zenoh-pico zenohpico)
 
 add_subdirectory(stm32cubef4)
 add_subdirectory(mxchip_bsp)
