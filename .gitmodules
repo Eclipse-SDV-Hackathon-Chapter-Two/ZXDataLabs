@@ -1,6 +1,9 @@
 [submodule "shared/lib/threadx"]
 	path = shared/lib/threadx
-	url = https://github.com/eclipse-threadx/threadx.git
+	url = https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/zx_dl_threadx.git
 [submodule "shared/lib/netxduo"]
 	path = shared/lib/netxduo
-	url = https://github.com/eclipse-threadx/netxduo.git
+	url = https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/zx_dl_netxduo.git
+[submodule "shared/lib/zenoh-pico"]
+	path = shared/lib/zenoh-pico
+	url = https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/zx_dl_zenoh-pico.git

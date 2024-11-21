@@ -42,7 +42,7 @@
 /*****************************************************************************************/
 
 #define  DEMO_STACK_SIZE            2048
-#define  CLIENT_ID_STRING           "nx_ecu1"
+#define  CLIENT_ID_STRING           "ecub"
 #define  MQTT_CLIENT_STACK_SIZE     4096
 
 #define  STRLEN(p)                  (sizeof(p) - 1)
@@ -58,10 +58,10 @@ static NXD_MQTT_CLIENT              mqtt_client;
 
 
 /* Define the test threads.  */
-#define TOPIC_NAME_PUB              "move1"
-#define TOPIC_NAME_SUB              "disp1"
+#define TOPIC_NAME_PUB              "ecub/tx"
+#define TOPIC_NAME_SUB              "ecub/rx"
 #define MESSAGE_STRING \
-  "{\"user\": \"nx_ecu1\", \"command\": \"move1\", \"data\": \"23.3\" }"
+  "{\"user\": \"ecub\", \"command\": \"to_ecuf\", \"data\": \"23.3\" }"
 
 /* Define the priority of the MQTT internal thread. */
 #define MQTT_THREAD_PRIORTY      2
@@ -105,7 +105,6 @@ static VOID my_notify_func(NXD_MQTT_CLIENT* client_ptr, UINT number_of_messages)
 {
     NX_PARAMETER_NOT_USED(client_ptr);
     NX_PARAMETER_NOT_USED(number_of_messages);
-    printf("I received something!\n");
     tx_event_flags_set(&mqtt_app_flag, DEMO_MESSAGE_EVENT, TX_OR);
     return;
 
@@ -177,15 +176,16 @@ NXD_ADDRESS server_ip;
 
 }
 
-void mqtt_thread_cyclic(ULONG parameter)
+void mqtt_thread_cyclic(char msg_buffer[], size_t buffer_size)
 {
   ULONG events;
   UINT topic_length, message_length;
   UINT status;
     /* Publish a message with QoS Level 1. */
-  status = nxd_mqtt_client_publish(
-      &mqtt_client, TOPIC_NAME_PUB, STRLEN(TOPIC_NAME_PUB),
-      (CHAR *)MESSAGE_STRING, STRLEN(MESSAGE_STRING), 0, QOS1, NX_NO_WAIT);
+
+  status = nxd_mqtt_client_publish(&mqtt_client, TOPIC_NAME_PUB,
+                                   STRLEN(TOPIC_NAME_PUB), (CHAR *)msg_buffer,
+                                   buffer_size, 0, QOS1, NX_NO_WAIT);
 
   /* Now wait for the broker to publish the message. */
 
