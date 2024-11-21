@@ -12,6 +12,11 @@
 
 -->
 
+# Team ZXData Labs
+
+![alt text](logo.png "ZXData Labs")
+
+
 # Eclipse ThreadX hackathon challenge
 
 This starter application is an adaptation of a sample developed originally by Microsoft. The original code can be found here:
