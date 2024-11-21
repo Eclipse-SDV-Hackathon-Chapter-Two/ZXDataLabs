@@ -42,7 +42,7 @@
 /*****************************************************************************************/
 
 #define  DEMO_STACK_SIZE            2048
-#define  CLIENT_ID_STRING           "nx_ecu1"
+#define  CLIENT_ID_STRING           "ecuf"
 #define  MQTT_CLIENT_STACK_SIZE     4096
 
 #define  STRLEN(p)                  (sizeof(p) - 1)
@@ -58,10 +58,10 @@ static NXD_MQTT_CLIENT              mqtt_client;
 
 
 /* Define the test threads.  */
-#define TOPIC_NAME_PUB              "move1"
-#define TOPIC_NAME_SUB              "disp1"
+#define TOPIC_NAME_PUB              "ecuf/tx"
+#define TOPIC_NAME_SUB              "ecuf/rx"
 #define MESSAGE_STRING \
-  "{\"user\": \"nx_ecu1\", \"command\": \"move1\", \"data\": \"23.3\" }"
+  "{\"user\": \"ecuf\", \"command\": \"to_ecub\", \"data\": \"45.677\" }"
 
 /* Define the priority of the MQTT internal thread. */
 #define MQTT_THREAD_PRIORTY      2

@@ -27,7 +27,7 @@ typedef enum
 // ----------------------------------------------------------------------------
 // WiFi connection config
 // ----------------------------------------------------------------------------
-#define HOSTNAME      "nikoszxdatalabs"  //Change to unique hostname.
+#define HOSTNAME      "ecuf"  //Change to unique hostname.
 // Hackathon
 // #define WIFI_SSID     "ICF_Gast"
 // #define WIFI_PASSWORD "icfwlan11"

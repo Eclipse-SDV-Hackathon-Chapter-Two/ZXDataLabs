@@ -71,7 +71,7 @@ static void eclipsetx_thread_entry(ULONG parameter)
     //   printf("Temp: %d C\r\nHumidity: %d %%\r\n", temperature, humitidy);
     //   screen_print(buffer, L1);
       mqtt_thread_cyclic(0);
-      tx_thread_sleep(50);
+      tx_thread_sleep(200);
     }
 }
 
