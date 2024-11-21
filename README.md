@@ -60,6 +60,16 @@ Start the zxData hub.
 python3 zxdata-hub.py
 ```
 
+Used topics:
+* ecub/tx - publish topic of ecub 
+* ecub/rx - subscribe topic of ecub
+* ecuf/tx - publish topic of ecuf 
+* ecuf/rx - subscribe topic of ecuf
+	
+Used commands
+* to_ecub - send the recieved data to ecub
+* to_ecuf - send the recieved data to ecuf
+		
 ### ThreadX (Info and challenge)
 
 For more information about ThreadX and the challenge see [here](./TX_challenge.md)
