@@ -24,6 +24,8 @@
 
 #include "nx_api.h"
 #include "nxd_mqtt_client.h"
+#include "az3166_jsmn.h"
+#include "screen.h"
 
 /* MQTT Demo defines */
 
@@ -40,7 +42,7 @@
 /*****************************************************************************************/
 
 #define  DEMO_STACK_SIZE            2048
-#define  CLIENT_ID_STRING           "zxdata-ecu1"
+#define  CLIENT_ID_STRING           "nx_ecu1"
 #define  MQTT_CLIENT_STACK_SIZE     4096
 
 #define  STRLEN(p)                  (sizeof(p) - 1)
@@ -56,11 +58,13 @@ static NXD_MQTT_CLIENT              mqtt_client;
 
 
 /* Define the test threads.  */
-#define TOPIC_NAME                  "zxdata/move1"
-#define MESSAGE_STRING              "This is a message. "
+#define TOPIC_NAME_PUB              "move1"
+#define TOPIC_NAME_SUB              "disp1"
+#define MESSAGE_STRING \
+  "{\"user\": \"nx_ecu1\", \"command\": \"move1\", \"data\": \"23.3\" }"
 
 /* Define the priority of the MQTT internal thread. */
-#define MQTT_THREAD_PRIORTY         2
+#define MQTT_THREAD_PRIORTY      2
 
 /* Define the MQTT keep alive timer for 5 minutes */
 #define MQTT_KEEP_ALIVE_TIMER       300
@@ -74,14 +78,26 @@ TX_EVENT_FLAGS_GROUP                mqtt_app_flag;
 #define DEMO_ALL_EVENTS             3
 
 /* Declare buffers to hold message and topic. */
-static UCHAR message_buffer[NXD_MQTT_MAX_MESSAGE_LENGTH];
+static UCHAR message_buffer[512];
 static UCHAR topic_buffer[NXD_MQTT_MAX_TOPIC_NAME_LENGTH];
 
 /* Declare the disconnect notify function. */
 static VOID my_disconnect_func(NXD_MQTT_CLIENT *client_ptr)
 {
-    NX_PARAMETER_NOT_USED(client_ptr);
-    printf("client disconnected from server\n");
+    UINT status;
+    NXD_ADDRESS server_ip;
+    printf("Trying to reconnect!\n");
+    client_ptr->nxd_mqtt_ping_not_responded = NX_FALSE;
+    client_ptr->nxd_mqtt_ping_sent_time = 0;
+    server_ip.nxd_ip_version = 4;
+    server_ip.nxd_ip_address.v4 = LOCAL_SERVER_ADDRESS;
+    status = nxd_mqtt_client_connect(client_ptr, &server_ip, NXD_MQTT_PORT,
+                                     MQTT_KEEP_ALIVE_TIMER, 0, NX_WAIT_FOREVER);
+    if (status)
+    {
+        printf("client disconnected from server. Cannot reconnect\n");
+    }
+
 }
 
 
@@ -89,6 +105,7 @@ static VOID my_notify_func(NXD_MQTT_CLIENT* client_ptr, UINT number_of_messages)
 {
     NX_PARAMETER_NOT_USED(client_ptr);
     NX_PARAMETER_NOT_USED(number_of_messages);
+    printf("I received something!\n");
     tx_event_flags_set(&mqtt_app_flag, DEMO_MESSAGE_EVENT, TX_OR);
     return;
 
@@ -101,9 +118,6 @@ void thread_mqtt_entry(NX_IP *ip_ptr, NX_PACKET_POOL *pool_ptr)
 {
 UINT status;
 NXD_ADDRESS server_ip;
-ULONG events;
-UINT topic_length, message_length;
-
 
     /* Create MQTT client instance. */
     status = nxd_mqtt_client_create(&mqtt_client, "my_client", CLIENT_ID_STRING, STRLEN(CLIENT_ID_STRING),
@@ -150,7 +164,7 @@ UINT topic_length, message_length;
         error_counter++;
 
     /* Subscribe to the topic with QoS level 0. */
-    status = nxd_mqtt_client_subscribe(&mqtt_client, TOPIC_NAME, STRLEN(TOPIC_NAME), QOS0);
+    status = nxd_mqtt_client_subscribe(&mqtt_client, TOPIC_NAME_SUB, STRLEN(TOPIC_NAME_SUB), QOS0);
     if(status)
         error_counter++;
 
@@ -159,36 +173,38 @@ UINT topic_length, message_length;
     if(status)
         error_counter++;
 
+
+
+}
+
+void mqtt_thread_cyclic(ULONG parameter)
+{
+  ULONG events;
+  UINT topic_length, message_length;
+  UINT status;
     /* Publish a message with QoS Level 1. */
-    status = nxd_mqtt_client_publish(&mqtt_client, TOPIC_NAME, STRLEN(TOPIC_NAME),
-                                     (CHAR*)MESSAGE_STRING, STRLEN(MESSAGE_STRING), 0, QOS1, NX_WAIT_FOREVER);
+  status = nxd_mqtt_client_publish(
+      &mqtt_client, TOPIC_NAME_PUB, STRLEN(TOPIC_NAME_PUB),
+      (CHAR *)MESSAGE_STRING, STRLEN(MESSAGE_STRING), 0, QOS1, NX_NO_WAIT);
 
+  /* Now wait for the broker to publish the message. */
 
-    /* Now wait for the broker to publish the message. */
+  tx_event_flags_get(&mqtt_app_flag, DEMO_ALL_EVENTS, TX_OR_CLEAR, &events,
+                     NX_NO_WAIT);
+    if (events & DEMO_MESSAGE_EVENT) {
+        status = nxd_mqtt_client_message_get(
+            &mqtt_client, topic_buffer, sizeof(topic_buffer),&topic_length,
+        message_buffer, sizeof(message_buffer), &message_length);
 
-    tx_event_flags_get(&mqtt_app_flag, DEMO_ALL_EVENTS, TX_OR_CLEAR, &events, TX_WAIT_FOREVER);
-    if(events & DEMO_MESSAGE_EVENT)
-    {
-        status = nxd_mqtt_client_message_get(&mqtt_client, topic_buffer, sizeof(topic_buffer), &topic_length,
-                                             message_buffer, sizeof(message_buffer), &message_length);
-        if(status == NXD_MQTT_SUCCESS)
-        {
+        if (status == NXD_MQTT_SUCCESS) {
             topic_buffer[topic_length] = 0;
             message_buffer[message_length] = 0;
-            printf("topic = %s, message = %s\n", topic_buffer, message_buffer);
+            // printf("topic = %s, message = %s\n", topic_buffer, message_buffer);
+            az3166_parse((const char *)message_buffer);
+
+            zxdatalabs_screen_print(json_user, json_command, json_data);
         }
     }
-
-    /* Now unsubscribe the topic. */
-    // nxd_mqtt_client_unsubscribe(&mqtt_client, TOPIC_NAME, STRLEN(TOPIC_NAME));
-
-    /* Disconnect from the broker. */
-    // nxd_mqtt_client_disconnect(&mqtt_client);
-
-    /* Delete the client instance, release all the resources. */
-    // nxd_mqtt_client_delete(&mqtt_client);
-
-
 }
 
 
