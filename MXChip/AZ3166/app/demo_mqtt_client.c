@@ -30,7 +30,7 @@
 /* IP Address of the local server. */
 // #define  LOCAL_SERVER_ADDRESS (IP_ADDRESS(172, 20, 10, 6))
 /* Raspberry Pi IP Address */
-#define LOCAL_SERVER_ADDRESS (IP_ADDRESS(172, 20, 10, 6))
+#define LOCAL_SERVER_ADDRESS (IP_ADDRESS(192, 168, 0, 101))
 #undef NXD_MQTT_PORT
 #define NXD_MQTT_PORT 8080
 
@@ -40,7 +40,7 @@
 /*****************************************************************************************/
 
 #define  DEMO_STACK_SIZE            2048
-#define  CLIENT_ID_STRING           "mytestclient"
+#define  CLIENT_ID_STRING           "zxdata-ecu1"
 #define  MQTT_CLIENT_STACK_SIZE     4096
 
 #define  STRLEN(p)                  (sizeof(p) - 1)
@@ -56,7 +56,7 @@ static NXD_MQTT_CLIENT              mqtt_client;
 
 
 /* Define the test threads.  */
-#define TOPIC_NAME                  "topic"
+#define TOPIC_NAME                  "zxdata/move1"
 #define MESSAGE_STRING              "This is a message. "
 
 /* Define the priority of the MQTT internal thread. */
@@ -180,15 +180,14 @@ UINT topic_length, message_length;
     }
 
     /* Now unsubscribe the topic. */
-    nxd_mqtt_client_unsubscribe(&mqtt_client, TOPIC_NAME, STRLEN(TOPIC_NAME));
+    // nxd_mqtt_client_unsubscribe(&mqtt_client, TOPIC_NAME, STRLEN(TOPIC_NAME));
 
     /* Disconnect from the broker. */
-    nxd_mqtt_client_disconnect(&mqtt_client);
+    // nxd_mqtt_client_disconnect(&mqtt_client);
 
     /* Delete the client instance, release all the resources. */
-    nxd_mqtt_client_delete(&mqtt_client);
+    // nxd_mqtt_client_delete(&mqtt_client);
 
-    return;
 
 }
 
