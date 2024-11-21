@@ -1,10 +1,13 @@
-<p align="center" width="100%">
-
 # Abstraction Beyond ThreadX
+
+![build workflow](https://github.com/Eclipse-SDV-Hackathon-Chapter-Two/ZXDataLabs/actions/workflows/build.yml/badge.svg)
+
+<div align="center" width="100%">
+
 ## By ZXData Labs
 
 <img src="teamlogo.png" alt="ZXData Labs" width="300" height="300">
-</p>
+</div>
 
 ## Target
 
@@ -21,7 +24,7 @@ To begin, we will implement a basic communication system supporting publish/subs
 
 ## Architecture
 
-<img src="presentation/arch.webp" alt="Architecture">
+![Architecture](presentation/arch.webp)
 
 ## High-Level Implementation Overview
 
@@ -57,24 +60,30 @@ This layer provides higher-level functionalities by aggregating ECU Abstraction 
 Install mosquitto on Rasperi see [here](https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-raspberry-pi/)
 
 Run mosquitto with the given config.
+
 ```bash
 mosquitto -c mosquitto.conf
 ```
+
 ###
+
 Start the zxData hub.
+
 ```bash
 python3 zxdata-hub.py
 ```
 
 Used MQTT topics:
-* `ecub/tx` - publish topic of ecub 
-* `ecub/rx` - subscribe topic of ecub
-* `ecuf/tx` - publish topic of ecuf 
-* `ecuf/rx` - subscribe topic of ecuf
-	
+
+- `ecub/tx` - publish topic of ecub
+- `ecub/rx` - subscribe topic of ecub
+- `ecuf/tx` - publish topic of ecuf
+- `ecuf/rx` - subscribe topic of ecuf
+
 Used commands with the json data model
-* `to_ecub` - send the recieved data to ecub
-* `to_ecuf` - send the recieved data to ecuf
+
+- `to_ecub` - send the recieved data to ecub
+- `to_ecuf` - send the recieved data to ecuf
 
 ### Alternative/Add-on
 
@@ -84,7 +93,6 @@ We also provide the possibility to safe the messages in a mongoDB, which can for
 docker run mongo:latest
 python3 zxdata_hub_cloud_extension.py
 ```
-
 
 ### ThreadX (Info and challenge)
 
