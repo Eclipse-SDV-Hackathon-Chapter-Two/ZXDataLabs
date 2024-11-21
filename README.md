@@ -60,7 +60,7 @@ Run mosquitto with the given config.
 ```bash
 mosquitto -c mosquitto.conf
 ```
-
+###
 Start the zxData hub.
 ```bash
 python3 zxdata-hub.py
@@ -75,7 +75,14 @@ Used MQTT topics:
 Used commands with the json data model
 * `to_ecub` - send the recieved data to ecub
 * `to_ecuf` - send the recieved data to ecuf
-		
+
+### Alternative/Add-on
+
+We also provide the possibility to safe the messages in a mongoDB, which can for example be placed in the cloud. Therefore you need to start the zxData hub cloud extension as follows:
+```bash
+python3 zxdata_hub_cloud_extension.py
+```
+
 ### ThreadX (Info and challenge)
 
 For more information about ThreadX and the challenge see [here](./TX_challenge.md)
