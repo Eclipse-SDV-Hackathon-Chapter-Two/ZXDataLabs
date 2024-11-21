@@ -31,8 +31,8 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME}
     azrtos::threadx
     azrtos::netxduo
-    # zenohpico_static
-    # zenohpico_shared
+    zenohpico_static
+    zenohpico_shared
 
     stm32cubef4
     mxchip_bsp
@@ -40,6 +40,7 @@ target_link_libraries(${PROJECT_NAME}
     jsmn
     wiced_sdk
 )
+
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC

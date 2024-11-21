@@ -21,7 +21,7 @@
 #include "cmsis_utils.h"
 #include "screen.h"
 #include "wwd_networking.h"
-// #include "zenoh-pico.h"
+#include "zenoh-pico.h"
 
 #include "cloud_config.h"
 #include "sensor.h"
