@@ -79,7 +79,9 @@ Used commands with the json data model
 ### Alternative/Add-on
 
 We also provide the possibility to safe the messages in a mongoDB, which can for example be placed in the cloud. Therefore you need to start the zxData hub cloud extension as follows (remember to adapt the mongo db connection string):
+
 ```bash
+docker run mongo:latest
 python3 zxdata_hub_cloud_extension.py
 ```
 
