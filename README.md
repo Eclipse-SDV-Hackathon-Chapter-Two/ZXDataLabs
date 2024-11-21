@@ -21,6 +21,8 @@ To begin, we will implement a basic communication system supporting publish/subs
 
 ## Architecture
 
+<img src="presentation/arch.webp" alt="Architecture">
+
 ## High-Level Implementation Overview
 
 ### Transport Abstraction Layer
