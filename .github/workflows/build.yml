@@ -1,0 +1,28 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Set up dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential ninja-build
+        sudo apt-get install -y gcc-arm-none-eabi
+
+    - name: Run build script
+      run: bash MXChip/AZ3166/scripts/build.sh
