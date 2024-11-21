@@ -11,7 +11,7 @@
 #     Microsoft         - Initial version
 #     Frédéric Desbiens - 2024 version.
 
-cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 set(CMAKE_C_STANDARD 99)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(ARM_GCC_PATH "/Applications/ARM/bin")
