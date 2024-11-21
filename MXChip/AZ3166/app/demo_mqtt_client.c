@@ -31,6 +31,7 @@
 // #define  LOCAL_SERVER_ADDRESS (IP_ADDRESS(172, 20, 10, 6))
 /* Raspberry Pi IP Address */
 #define LOCAL_SERVER_ADDRESS (IP_ADDRESS(172, 20, 10, 6))
+#undef NXD_MQTT_PORT
 #define NXD_MQTT_PORT 8080
 
 // 172.20.10.6
