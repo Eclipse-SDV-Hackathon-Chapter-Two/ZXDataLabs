@@ -27,13 +27,13 @@ typedef enum
 // ----------------------------------------------------------------------------
 // WiFi connection config
 // ----------------------------------------------------------------------------
-#define HOSTNAME      "eclipse-threadx"  //Change to unique hostname.
+#define HOSTNAME      "zxdatalabs-ecu1"  //Change to unique hostname.
 // Hackathon
 // #define WIFI_SSID     "ICF_Gast"
 // #define WIFI_PASSWORD "icfwlan11"
 // Nikos
-#define WIFI_SSID     "nIphone15"
-#define WIFI_PASSWORD "sdvhack123"
+#define WIFI_SSID "TP-Link_8277"
+#define WIFI_PASSWORD "66636847"
 // #define WIFI_SSID     "IwansIphone"
 // #define WIFI_PASSWORD "iwannavi2211"
 #define WIFI_MODE     WPA2_PSK_AES

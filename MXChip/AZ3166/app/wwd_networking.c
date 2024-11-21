@@ -390,11 +390,11 @@ UINT wwd_network_connect()
         printf("ERROR: dns_connect\r\n");
     }
 
-    // Wait for an SNTP sync
-    else if ((status = sntp_sync()))
-    {
-        printf("ERROR: Failed to sync SNTP time (0x%08x)\r\n", status);
-    }
+    // // Wait for an SNTP sync
+    // else if ((status = sntp_sync()))
+    // {
+    //     printf("ERROR: Failed to sync SNTP time (0x%08x)\r\n", status);
+    // }
 
     return status;
 }
