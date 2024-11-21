@@ -40,7 +40,7 @@
 /*****************************************************************************************/
 
 #define  DEMO_STACK_SIZE            2048
-#define  CLIENT_ID_STRING           "zxdata-ecu1"
+#define  CLIENT_ID_STRING           "zxdata-lukas"
 #define  MQTT_CLIENT_STACK_SIZE     4096
 
 #define  STRLEN(p)                  (sizeof(p) - 1)
@@ -56,8 +56,8 @@ static NXD_MQTT_CLIENT              mqtt_client;
 
 
 /* Define the test threads.  */
-#define TOPIC_NAME                  "zxdata/move1"
-#define MESSAGE_STRING              "This is a message. "
+#define TOPIC_NAME                  "move1"
+#define MESSAGE_STRING              "{\"command\":  \"\", \"data\":12}"
 
 /* Define the priority of the MQTT internal thread. */
 #define MQTT_THREAD_PRIORTY         2
