@@ -1,8 +1,10 @@
+<div style="text-align: center;">
+
 # Abstraction Beyond ThreadX
+## By ZXData Labs
 
-## Team ZXData Labs
-
-![alt text](logo.png "ZXData Labs")
+<img src="logo.png" alt="ZXData Labs" width="300" height="300">
+</div>
 
 ## Target
 
@@ -16,6 +18,8 @@ This is achieved through the following infrastructure components:
 Among the two components above, establishing a robust data model (#2) takes precedence. A well-defined schema, structured logically, facilitates the creation of system-level and application-level services, enabling new vehicle functionalities to be developed concurrently with the refinement of the communication framework (#1).
 
 To begin, we will implement a basic communication system supporting publish/subscribe (and request/response) patterns using protocols like MQTT. Once feature development is unblocked, we will revisit this infrastructure for optimization, such as exploring data distribution services with custom serialization for better performance.
+
+## Architecture
 
 ## High-Level Implementation Overview
 
@@ -60,15 +64,15 @@ Start the zxData hub.
 python3 zxdata-hub.py
 ```
 
-Used topics:
-* ecub/tx - publish topic of ecub 
-* ecub/rx - subscribe topic of ecub
-* ecuf/tx - publish topic of ecuf 
-* ecuf/rx - subscribe topic of ecuf
+Used MQTT topics:
+* `ecub/tx` - publish topic of ecub 
+* `ecub/rx` - subscribe topic of ecub
+* `ecuf/tx` - publish topic of ecuf 
+* `ecuf/rx` - subscribe topic of ecuf
 	
-Used commands
-* to_ecub - send the recieved data to ecub
-* to_ecuf - send the recieved data to ecuf
+Used commands with the json data model
+* `to_ecub` - send the recieved data to ecub
+* `to_ecuf` - send the recieved data to ecuf
 		
 ### ThreadX (Info and challenge)
 
