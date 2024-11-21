@@ -1,14 +1,14 @@
-/* 
+/*
  * Copyright (c) Microsoft
  * Copyright (c) 2024 Eclipse Foundation
- * 
- *  This program and the accompanying materials are made available 
+ *
+ *  This program and the accompanying materials are made available
  *  under the terms of the MIT license which is available at
  *  https://opensource.org/license/mit.
- * 
+ *
  *  SPDX-License-Identifier: MIT
- * 
- *  Contributors: 
+ *
+ *  Contributors:
  *     Microsoft         - Initial version
  *     Frédéric Desbiens - 2024 version.
  */
@@ -226,7 +226,6 @@ UINT wwd_network_init(CHAR* ssid, CHAR* password, WiFi_Mode mode)
         nx_packet_pool_delete(&nx_pool[1]);
         printf("ERROR: wifi_init (0x%08x)\r\n", status);
     }
-
     // Create an IP instance
     else if ((status = nx_ip_create(&nx_ip,
                   "NetX IP Instance 0",
@@ -329,7 +328,7 @@ UINT wwd_network_init(CHAR* ssid, CHAR* password, WiFi_Mode mode)
         nx_dhcp_delete(&nx_dhcp_client);
         nx_ip_delete(&nx_ip);
         nx_packet_pool_delete(&nx_pool[0]);
-        nx_packet_pool_delete(&nx_pool[1]);        
+        nx_packet_pool_delete(&nx_pool[1]);
     }
 
     // Initialize TLS

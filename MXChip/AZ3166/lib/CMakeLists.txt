@@ -1,13 +1,13 @@
 #  Copyright (c) Microsoft
 #  Copyright (c) 2024 Eclipse Foundation
-# 
-#  This program and the accompanying materials are made available 
+#
+#  This program and the accompanying materials are made available
 #  under the terms of the MIT license which is available at
 #  https://opensource.org/license/mit.
-# 
+#
 #  SPDX-License-Identifier: MIT
-# 
-#  Contributors: 
+#
+#  Contributors:
 #     Microsoft         - Initial version
 #     Frédéric Desbiens - 2024 version.
 
@@ -22,6 +22,7 @@ set(NXD_ENABLE_FILE_SERVERS OFF CACHE BOOL "Disable fileX dependency by netxduo"
 add_subdirectory(${SHARED_LIB_DIR}/threadx threadx)
 add_subdirectory(${SHARED_LIB_DIR}/netxduo netxduo)
 add_subdirectory(${SHARED_LIB_DIR}/jsmn jsmn)
+# add_subdirectory(${SHARED_LIB_DIR}/zenoh-pico zenohpico)
 
 add_subdirectory(stm32cubef4)
 add_subdirectory(mxchip_bsp)

@@ -20,4 +20,6 @@ CTestTestfile.cmake
 *.map
 #*.a
 *.htm
+.cache/
+.DS_Store
 

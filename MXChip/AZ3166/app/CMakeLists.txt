@@ -1,13 +1,13 @@
 #  Copyright (c) Microsoft
 #  Copyright (c) 2024 Eclipse Foundation
-# 
-#  This program and the accompanying materials are made available 
+#
+#  This program and the accompanying materials are made available
 #  under the terms of the MIT license which is available at
 #  https://opensource.org/license/mit.
-# 
+#
 #  SPDX-License-Identifier: MIT
-# 
-#  Contributors: 
+#
+#  Contributors:
 #     Microsoft         - Initial version
 #     Frédéric Desbiens - 2024 version.
 
@@ -23,6 +23,7 @@ set(SOURCES
     sntp_client.c
     main.c
     wwd_networking.c
+    demo_mqtt_client.c
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -30,6 +31,8 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME}
     azrtos::threadx
     azrtos::netxduo
+    # zenohpico_static
+    # zenohpico_shared
 
     stm32cubef4
     mxchip_bsp
@@ -38,13 +41,13 @@ target_link_libraries(${PROJECT_NAME}
     wiced_sdk
 )
 
-target_include_directories(${PROJECT_NAME} 
-    PUBLIC 
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
         .
 )
 
-target_link_directories(${PROJECT_NAME} 
-    PUBLIC 
+target_link_directories(${PROJECT_NAME}
+    PUBLIC
         startup
 )
 

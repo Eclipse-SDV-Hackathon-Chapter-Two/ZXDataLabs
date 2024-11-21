@@ -1,14 +1,14 @@
-/* 
+/*
  * Copyright (c) Microsoft
  * Copyright (c) 2024 Eclipse Foundation
- * 
- *  This program and the accompanying materials are made available 
+ *
+ *  This program and the accompanying materials are made available
  *  under the terms of the MIT license which is available at
  *  https://opensource.org/license/mit.
- * 
+ *
  *  SPDX-License-Identifier: MIT
- * 
- *  Contributors: 
+ *
+ *  Contributors:
  *     Microsoft         - Initial version
  *     Frédéric Desbiens - 2024 version.
  */
@@ -28,8 +28,14 @@ typedef enum
 // WiFi connection config
 // ----------------------------------------------------------------------------
 #define HOSTNAME      "eclipse-threadx"  //Change to unique hostname.
-#define WIFI_SSID     ""
-#define WIFI_PASSWORD ""
+// Hackathon
+// #define WIFI_SSID     "ICF_Gast"
+// #define WIFI_PASSWORD "icfwlan11"
+// Nikos
+#define WIFI_SSID     "nIphone15"
+#define WIFI_PASSWORD "sdvhack123"
+// #define WIFI_SSID     "IwansIphone"
+// #define WIFI_PASSWORD "iwannavi2211"
 #define WIFI_MODE     WPA2_PSK_AES
 
 #endif // _CLOUD_CONFIG_H
