@@ -48,16 +48,16 @@ This layer provides higher-level functionalities by aggregating ECU Abstraction 
 
 ### Running the MQTT broker on Raspberry PI
 
-#### Start the Broker
+Install mosquitto on Rasperi see [here](https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-raspberry-pi/)
 
+Run mosquitto with the given config.
 ```bash
 mosquitto -c mosquitto.conf
 ```
 
-#### Start the ZXData Hub
-
+Start the zxData hub.
 ```bash
-python3 txdata-hub.py
+python3 zxdata-hub.py
 ```
 
 ### ThreadX (Info and challenge)
