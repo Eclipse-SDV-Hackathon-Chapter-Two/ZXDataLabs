@@ -3,7 +3,7 @@
 # Abstraction Beyond ThreadX
 ## By ZXData Labs
 
-<img src="logo.png" alt="ZXData Labs" width="300" height="300">
+<img src="teamlogo.png" alt="ZXData Labs" width="300" height="300">
 </p>
 
 ## Target
