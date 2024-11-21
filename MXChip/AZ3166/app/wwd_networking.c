@@ -320,17 +320,6 @@ UINT wwd_network_init(CHAR* ssid, CHAR* password, WiFi_Mode mode)
     }
 #endif
 
-    // Initialize the SNTP client
-    else if ((status = sntp_init()))
-    {
-        printf("ERROR: Failed to init the SNTP client (0x%08x)\r\n", status);
-        nx_dns_delete(&nx_dns_client);
-        nx_dhcp_delete(&nx_dhcp_client);
-        nx_ip_delete(&nx_ip);
-        nx_packet_pool_delete(&nx_pool[0]);
-        nx_packet_pool_delete(&nx_pool[1]);
-    }
-
     // Initialize TLS
     else
     {
@@ -372,7 +361,7 @@ UINT wwd_network_connect()
                 &wiced_ssid, netx_mode, (uint8_t*)netx_password, strlen(netx_password), NULL, WWD_STA_INTERFACE);
             tx_mutex_put(&(nx_ip.nx_ip_protection));
 
-            tx_thread_sleep(5 * TX_TIMER_TICKS_PER_SECOND);
+            tx_thread_sleep( TX_TIMER_TICKS_PER_SECOND);
         } while (join_result != WWD_SUCCESS);
 
         printf("SUCCESS: WiFi connected\r\n");

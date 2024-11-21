@@ -20,7 +20,6 @@
 #include "board_init.h"
 #include "cmsis_utils.h"
 #include "screen.h"
-#include "sntp_client.h"
 #include "wwd_networking.h"
 // #include "zenoh-pico.h"
 
@@ -28,12 +27,17 @@
 #include "sensor.h"
 
 #define ECLIPSETX_THREAD_STACK_SIZE 4096
+#define MQTT_THREAD_STACK_SIZE 4096
 #define ECLIPSETX_THREAD_PRIORITY   4
+#define MQTT_THREAD_PRIORITY 6
 
 TX_THREAD eclipsetx_thread;
+TX_THREAD mqtt_thread;
 ULONG eclipsetx_thread_stack[ECLIPSETX_THREAD_STACK_SIZE / sizeof(ULONG)];
+ULONG mqtt_thread_stack[MQTT_THREAD_STACK_SIZE / sizeof(ULONG)];
 
 extern void thread_mqtt_entry(NX_IP *ip, NX_PACKET_POOL* pool);
+extern void mqtt_thread_cyclic(ULONG parameter);
 
 static void eclipsetx_thread_entry(ULONG parameter)
 {
@@ -56,18 +60,18 @@ static void eclipsetx_thread_entry(ULONG parameter)
     screen_print("Connected to WiFi",  L0);
 
     thread_mqtt_entry(&nx_ip, &nx_pool[0]);
-    hts221_data_t data;
+    // hts221_data_t data;
 
     while (1) {
-      data = hts221_data_read();
-      int humitidy = (int)data.humidity_perc;
-      int temperature = (int)data.temperature_degC;
-      char buffer[64];
-      snprintf(buffer, sizeof(buffer), "Temp: %d C\r\nHumidity: %d %%", temperature, humitidy);
-      printf("Temp: %d C\r\nHumidity: %d %%\r\n", temperature, humitidy);
-      screen_print(buffer, L1);
-
-      tx_thread_sleep(TX_TIMER_TICKS_PER_SECOND);
+    //   data = hts221_data_read();
+    //   int humitidy = (int)data.humidity_perc;
+    //   int temperature = (int)data.temperature_degC;
+    //   char buffer[64];
+    //   snprintf(buffer, sizeof(buffer), "Temp: %d C\r\nHumidity: %d %%\r\n", temperature, humitidy);
+    //   printf("Temp: %d C\r\nHumidity: %d %%\r\n", temperature, humitidy);
+    //   screen_print(buffer, L1);
+      mqtt_thread_cyclic(0);
+      tx_thread_sleep(50);
     }
 }
 
