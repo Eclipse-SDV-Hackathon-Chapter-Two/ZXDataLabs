@@ -185,3 +185,14 @@ Finally, there are other projects of interest in the broader Eclipse open source
 - [Eclipse Ditto](https://eclipse.dev/ditto/) can be used to create digital twins of your boards and offers an extensive RESTFul API.
 
 Where will your journey beyond ThreadX bring you? 
+
+## Running the MQTT broker on Rasperi
+### Start the Broker
+```
+mosquitto -c mosquitto.conf 
+```
+
+### Start the ZXData Hub
+```
+python3 txdata-hub.py 
+```
