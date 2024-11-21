@@ -1,10 +1,10 @@
-<center>
+<p align="center">
 
 # Abstraction Beyond ThreadX
 ## By ZXData Labs
 
 <img src="logo.png" alt="ZXData Labs" width="300" height="300">
-</center>
+</p>
 
 ## Target
 
