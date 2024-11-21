@@ -62,6 +62,16 @@ static void eclipsetx_thread_entry(ULONG parameter)
       data = hts221_data_read();
       int humitidy = (int)data.humidity_perc;
       int temperature = (int)data.temperature_degC;
+      int randomValue = (rand() % 90) + 10;
+      temperature = temperature + randomValue;
+      if (temperature > 99)
+      {
+        temperature = 99;
+      }else if (temperature < 10)
+      {
+        temperature = 10;
+      }
+      
       char buffer[64];
       snprintf(buffer, sizeof(buffer), "Temp: %d C\r\nHumidity: %d %%", temperature, humitidy);
       printf("Temp: %d C\r\nHumidity: %d %%\r\n", temperature, humitidy);
